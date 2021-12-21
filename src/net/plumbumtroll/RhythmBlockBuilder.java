@@ -1,12 +1,10 @@
 package net.plumbumtroll;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 public class RhythmBlockBuilder {
 
-    private HtmlReader reader;
+    private final HtmlReader reader;
 
     public RhythmBlockBuilder(HtmlReader reader) {
         this.reader = reader;
@@ -14,20 +12,17 @@ public class RhythmBlockBuilder {
 
     // Вычленяет из строки рифмуемое слово
     public String stringCleaner(String inputString) {
-        // TODO: доделать метод для определения более общих строк
+        // TODO: доделать метод, который бы учитывал знаки препинания, лишние пробелы в конце, приводил всё к одному регистру
 
         String[] words = inputString.split(" ");
         return words[words.length - 1];
     }
 
     private boolean isRhyme(String s1, String s2) {
-        // TODO: реализовать обращение к сайту
-        return (s1.substring(s1.length() - 2).equals(s2.substring(s2.length() - 2)));
-
-        //return false;
+        return reader.GetRhythmWords(s1).contains(s2);
     }
 
-    public ArrayList<Block> buildBlocks(ArrayList<String> poetrySource, ) {
+    public ArrayList<Block> buildBlocks(ArrayList<String> poetrySource) {
 
         ArrayList<String> poetrySourceTemp = new ArrayList<>(poetrySource);
         ArrayList<Block> blocks = new ArrayList<>();
